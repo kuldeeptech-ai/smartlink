@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>SmartLink</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="min-h-screen bg-slate-900 flex items-center justify-center text-white">
+
+<div class="max-w-xl w-full p-6">
+  <h1 class="text-3xl font-bold text-center mb-2">SmartLink</h1>
+  <p class="text-center text-slate-300 mb-6">
+    One link → Direct app open
+  </p>
+
+  <div class="bg-slate-800 p-6 rounded-xl">
+    <input id="input"
+      class="w-full p-3 rounded text-black"
+      placeholder="https://instagram.com/username">
+
+    <button onclick="gen()"
+      class="mt-4 w-full bg-blue-600 py-3 rounded font-bold">
+      Generate Smart Link
+    </button>
+
+    <div id="box" class="hidden mt-4">
+      <div class="flex gap-2">
+        <input id="out" class="flex-1 p-2 text-black rounded" readonly>
+        <button onclick="copy()"
+          class="bg-green-600 px-4 rounded font-bold">
+          Copy
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function gen() {
+  const v = input.value.trim();
+  if (!v) return alert("Link paste karo");
+
+  out.value = location.origin + "/go?url=" + encodeURIComponent(v);
+  box.classList.remove("hidden");
+}
+
+function copy() {
+  out.select();
+  document.execCommand("copy");
+  alert("Copied");
+}
+</script>
+
+</body>
+</html>
